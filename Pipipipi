@@ -1,0 +1,18 @@
+# ---- Tejando Keyboard Music ----
+      - name: Descompactar o projeto
+        run: unzip -q TejandoKeyboardMusic.zip -d novo
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.7
+      - name: Compilar o APK
+        working-directory: novo/TejandoKeyboard
+        run: gradle assembleDebug --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tejando-Keyboard-Music-debug-apk
+          path: novo/TejandoKeyboard/app/build/outputs/apk/debug/app-debug.apk
